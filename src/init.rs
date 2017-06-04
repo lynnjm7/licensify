@@ -1,9 +1,9 @@
-extern crate git2; 
+extern crate git2;
 
 use self::git2::Repository;
 
 
-use std::fs; 
+use std::fs;
 use std::env;
 use std::path::PathBuf;
 
@@ -19,7 +19,7 @@ fn create_licensify_dir(path: &PathBuf) {
 fn clone_licenses(path: &PathBuf) {
     println!("Clonging license templates...");
     let url = "https://github.com/lynnjm7/licenses.git";
-    
+
     match Repository::clone(url, path) {
         Ok(_) => println!("    license templates have been cloned!"),
         Err(_) => println!("    we were unable to clone the license templates!"),
@@ -27,12 +27,12 @@ fn clone_licenses(path: &PathBuf) {
 }
 
 pub fn setup_licensify() {
-    let mut home_dir = env::home_dir().unwrap(); 
-    
+    let mut home_dir = env::home_dir().unwrap();
+
     // Create the home directory (for storing configuration files and the license snippets)
     home_dir.push(".licensify");
-    create_licensify_dir(&home_dir); 
-    
+    create_licensify_dir(&home_dir);
+
     // Clone the license templates into the "license" directory within the home directory
     home_dir.push("license");
     clone_licenses(&home_dir);
