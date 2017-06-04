@@ -2,7 +2,6 @@ extern crate git2;
 
 use self::git2::Repository;
 
-
 use std::fs;
 use std::env;
 use std::path::PathBuf;

@@ -19,7 +19,6 @@ fn setup_cmd_args<'a, 'b>() -> clap::App<'a, 'b> {
                  .long("list")
                  .help("List the available licenses"))
         .arg(Arg::with_name("license").long("license").index(1))
-
 }
 
 fn main() {
