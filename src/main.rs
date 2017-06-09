@@ -29,24 +29,25 @@ fn main() {
     }
 
     if cmd_args.is_present("list") {
-        println!("list available licenses");
+        license::list_licenses();
         return;
     }
 
-    let license = cmd_args.value_of("license").unwrap();
+    let license = match cmd_args.value_of("license") {
+        Some(x) => x,
+        None => ""
+    };
+
+    // TODO I'm sure there's a better way to handle this error processing... but this works for now
+    if license == "" {
+        println!("Please enter a valid license");
+    }
+
     println!("{}", license);
 
-    // Setup command line arguments
-    //
-    // Process command line arguments
-    // if init: run initial setup functions
-    //
-    // if list: list possible options
-    //
-    // Read config from file and set values accordingly (not command line args will overwrite this)
+    // Read config from file and set values accordingly (note command line args will overwrite this)
     //
     // Given the license to produce, and the values to be used in the template, process the
     // template, producing the final license output.
 
-    println!("Hello, world!");
 }
