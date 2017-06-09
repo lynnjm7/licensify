@@ -1,6 +1,8 @@
 extern crate licensify;
 extern crate clap;
 
+use std::process;
+
 use clap::{App, Arg};
 use licensify::{init, license};
 
@@ -35,16 +37,11 @@ fn main() {
 
     let license = match cmd_args.value_of("license") {
         Some(x) => x,
-        None => ""
+        None => {
+            println!("Please enter a valid license. Use --help for usage information.");
+            process::exit(-1);
+        }
     };
-
-    // TODO I'm sure there's a better way to handle this error processing... but this works for now
-    if license == "" {
-        println!("Please enter a valid license. Use --help for usage information.");
-        return;
-    }
-
-    println!("{}", license);
 
     // Read config from file and set values accordingly (note command line args will overwrite this)
     //
