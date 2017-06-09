@@ -40,7 +40,8 @@ fn main() {
 
     // TODO I'm sure there's a better way to handle this error processing... but this works for now
     if license == "" {
-        println!("Please enter a valid license");
+        println!("Please enter a valid license. Use --help for usage information.");
+        return;
     }
 
     println!("{}", license);
@@ -50,4 +51,6 @@ fn main() {
     // Given the license to produce, and the values to be used in the template, process the
     // template, producing the final license output.
 
+    let license_txt = license::fetch_license_text(license);
+    println!("{}", license_txt);
 }
