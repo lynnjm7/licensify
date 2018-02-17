@@ -6,11 +6,14 @@ use std::process;
 use clap::{App, Arg};
 use licensify::{init, license};
 
+const NAME: &'static str = env!("CARGO_PKG_NAME");
+const VERSION: &'static str = env!("CARGO_PKG_VERSION");
+const AUTHORS: &'static str = env!("CARGO_PKG_AUTHORS");
 
 fn setup_cmd_args<'a, 'b>() -> clap::App<'a, 'b> {
-    App::new("Licensify")
-        .version("1.0")
-        .author("Josh Lynn <lynnjm7@gmail.com")
+    App::new(NAME)
+        .version(VERSION)
+        .author(AUTHORS)
         .about("Creates a license file for a project")
         .arg(Arg::with_name("init")
                  .short("i")

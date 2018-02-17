@@ -16,7 +16,7 @@ fn create_licensify_dir(path: &PathBuf) {
 }
 
 fn clone_licenses(path: &PathBuf) {
-    println!("Clonging license templates...");
+    println!("Cloning license templates...");
     let url = "https://github.com/lynnjm7/licenses.git";
 
     match Repository::clone(url, path) {

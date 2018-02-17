@@ -9,7 +9,6 @@ fn get_template_dir() -> PathBuf {
     let mut lic_dir = env::home_dir().unwrap();
     lic_dir.push(".licensify/license/templates");
     lic_dir
-
 }
 
 pub fn list_licenses() {
@@ -18,7 +17,13 @@ pub fn list_licenses() {
     // generate a licenese.
     let lic_dir = get_template_dir();
 
-    let licenses = fs::read_dir(lic_dir).unwrap();
+    let licenses = match fs::read_dir(lic_dir) {
+        Ok(x) => x,
+        Err(_) => {
+            println!("Please initialize with --init.");
+            process::exit(-1);
+        }
+    };
 
     for lic in licenses {
         let path = lic.unwrap().path();
@@ -40,9 +45,11 @@ pub fn fetch_license_text(license: &str) -> String {
             process::exit(-1)
         }  
     };
+
+    // TODO(lynnjm7): Change this to use an impl on a struct notion...
     let mut buffer = BufReader::new(file);
     let mut contents = String::new();
     buffer.read_to_string(&mut contents);
-        
+
    return contents;
 }
