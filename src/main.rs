@@ -4,7 +4,7 @@ extern crate clap;
 use std::process;
 
 use clap::{App, Arg};
-use licensify::{init, license};
+use licensify::{init, config, license};
 
 const NAME: &'static str = env!("CARGO_PKG_NAME");
 const VERSION: &'static str = env!("CARGO_PKG_VERSION");
@@ -28,6 +28,8 @@ fn main() {
     let cmd_args = setup_cmd_args().get_matches();
     if cmd_args.is_present("init") {
         init::setup_licensify();
+        config::init_config();
+        println!("Initial configuration finished! Happy licensing!! :-)");
         return;
     }
 
@@ -50,6 +52,7 @@ fn main() {
     // template, producing the final license output.
 
     // TODO(lynnjm7): Read license values from config file
+    config::fetch_config();
     // TODO(lynnjm7): Get license values from cmd line args (override config file settings)
     let license_txt = license::fetch_license_text(license, "Josh Lynn", "2018", "Licensify");
     println!("{}", license_txt);
