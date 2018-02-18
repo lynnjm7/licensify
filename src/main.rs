@@ -15,14 +15,12 @@ fn setup_cmd_args<'a, 'b>() -> clap::App<'a, 'b> {
         .version(VERSION)
         .author(AUTHORS)
         .about("Creates a license file for a project")
-        .arg(Arg::with_name("init")
-                 .short("i")
-                 .long("init")
-                 .help("Runs the initial setup command"))
-        .arg(Arg::with_name("list")
-                 .short("l")
-                 .long("list")
-                 .help("List the available licenses"))
+        .arg(Arg::with_name("init").short("i").long("init").help(
+            "Runs the initial setup command",
+        ))
+        .arg(Arg::with_name("list").short("l").long("list").help(
+            "List the available licenses",
+        ))
         .arg(Arg::with_name("license").long("license").index(1))
 }
 
@@ -50,7 +48,6 @@ fn main() {
     //
     // Given the license to produce, and the values to be used in the template, process the
     // template, producing the final license output.
-
-    let license_txt = license::fetch_license_text(license);
+    let license_txt = license::fetch_license_text(license, "Josh Lynn", "2018", "Licensify");
     println!("{}", license_txt);
 }

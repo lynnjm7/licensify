@@ -6,3 +6,4 @@ authors = ["Josh Lynn <lynnjm7@gmail.com>"]
 [dependencies]
 clap = "*"
 git2 = "*"
+mustache = "*"
