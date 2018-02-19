@@ -1,10 +1,16 @@
 extern crate chrono;
+extern crate toml;
 
+use std::env;
+use std::fs::File;
 use std::io::prelude::*;
 use std::io;
+use std::path::PathBuf;
+use std::process;
 
 use self::chrono::prelude::*;
 
+#[derive(Serialize)]
 struct ConfigSettings {
     default_license: String,
     organization: String,
@@ -57,10 +63,18 @@ impl ConfigSettings {
     }
 
     fn setup_finalize(self) -> Self {
-        // TODO(lynnjm7): Save the ConfigSettings to a the ~/.licensify/config.toml file
         println!("\n====================");
         println!("Writing config file to ~/.licensify/config.toml...");
 
+        let config_file_path = get_config_file_path();
+        let mut config_file = File::create(config_file_path).unwrap();
+        match config_file.write_all(toml::to_string(&self).unwrap().into_bytes().as_slice()) {
+            Ok(_) => {},
+            Err(_) =>{
+                println!("Unable to write config.toml file.");
+                process::exit(-1);
+            }
+        };
 
         self
     }
@@ -78,6 +92,13 @@ fn prompt_user(prompt: &str) -> String {
     );
 
     value.trim().to_string()
+}
+
+fn get_config_file_path() -> PathBuf {
+    let mut path = env::home_dir().unwrap();
+    path.push(".licensify/config.toml");
+
+    path
 }
 
 pub fn init_config() {
