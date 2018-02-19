@@ -21,6 +21,15 @@ fn setup_cmd_args<'a, 'b>() -> clap::App<'a, 'b> {
         .arg(Arg::with_name("list").short("l").long("list").help(
             "List the available licenses",
         ))
+        .arg(Arg::with_name("organization").short("o").long("organization").value_name("ORG").help(
+            "Set the organization value to use in the license. This overrides the config file setting.",
+        ))
+        .arg(Arg::with_name("year").short("y").long("year").value_name("YEAR").help(
+            "Set the year value to use in the license. This overrides the config file setting.",
+        ))
+        .arg(Arg::with_name("project").short("p").long("project").value_name("PROJECT").help(
+            "Set the project value to use in the license. This overrides the config file setting.",
+        ))
         .arg(Arg::with_name("license").long("license").index(1))
 }
 
@@ -46,18 +55,32 @@ fn main() {
         }
     };
 
-    // Read config from file and set values accordingly (note command line args will overwrite this)
-    //
-    // Given the license to produce, and the values to be used in the template, process the
-    // template, producing the final license output.
+    // Get the config file contents and merge the provided flag options with the
+    // file values. The flag options should override the config file settings.
+    let mut config = config::fetch_config();
+    config.organization = match cmd_args.value_of("organization") {
+        Some(x) => x.to_string(),
+        None => config.organization,
+    };
 
-    let config = config::fetch_config();
-    // TODO(lynnjm7): Get license values from cmd line args (override config file settings)
+    config.year = match cmd_args.value_of("year") {
+        Some(x) => x.to_string(),
+        None => config.year
+    };
+
+    config.project = match cmd_args.value_of("project") {
+        Some(x) => x.to_string(),
+        None => config.project
+    };
+
+    // Generate the license text from the given paramaters
     let license_txt = license::fetch_license_text(
         license,
         config.organization.as_str(),
         config.year.as_str(),
         config.project.as_str(),
     );
+
+    // Output the license text to stdout
     println!("{}", license_txt);
 }
