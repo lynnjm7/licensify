@@ -10,12 +10,12 @@ use std::process;
 
 use self::chrono::prelude::*;
 
-#[derive(Serialize)]
-struct ConfigSettings {
-    default_license: String,
-    organization: String,
-    year: String,
-    project: String,
+#[derive(Deserialize, Serialize)]
+pub struct ConfigSettings {
+    pub default_license: String,
+    pub organization: String,
+    pub year: String,
+    pub project: String,
 }
 
 impl ConfigSettings {
@@ -69,8 +69,8 @@ impl ConfigSettings {
         let config_file_path = get_config_file_path();
         let mut config_file = File::create(config_file_path).unwrap();
         match config_file.write_all(toml::to_string(&self).unwrap().into_bytes().as_slice()) {
-            Ok(_) => {},
-            Err(_) =>{
+            Ok(_) => {}
+            Err(_) => {
                 println!("Unable to write config.toml file.");
                 process::exit(-1);
             }
@@ -112,8 +112,11 @@ pub fn init_config() {
         .setup_finalize();
 }
 
-pub fn fetch_config() {
-    // TODO(lynnjm7): Get and serialize the config file to return the default
-    // settings
-    println!("fetching config settings...");
+pub fn fetch_config() -> ConfigSettings {
+    let config_file_path = get_config_file_path();
+    let mut config_file = File::open(config_file_path).unwrap();
+    let mut contents = String::new();
+    config_file.read_to_string(&mut contents).unwrap();
+
+    toml::from_str(contents.as_str()).unwrap()
 }

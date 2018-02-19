@@ -51,9 +51,13 @@ fn main() {
     // Given the license to produce, and the values to be used in the template, process the
     // template, producing the final license output.
 
-    // TODO(lynnjm7): Read license values from config file
-    config::fetch_config();
+    let config = config::fetch_config();
     // TODO(lynnjm7): Get license values from cmd line args (override config file settings)
-    let license_txt = license::fetch_license_text(license, "Josh Lynn", "2018", "Licensify");
+    let license_txt = license::fetch_license_text(
+        license,
+        config.organization.as_str(),
+        config.year.as_str(),
+        config.project.as_str(),
+    );
     println!("{}", license_txt);
 }
