@@ -26,31 +26,19 @@ impl License {
         }
     }
 
-    fn set_org(self, org: String) -> License {
-        License {
-            name: self.name,
-            organization: org,
-            year: self.year,
-            project: self.project,
-        }
+    fn set_org(mut self, org: String) -> Self {
+        self.organization = org;
+        self
     }
 
-    fn set_year(self, year: String) -> License {
-        License {
-            name: self.name,
-            organization: self.organization,
-            year: year,
-            project: self.project,
-        }
+    fn set_year(mut self, year: String) -> Self {
+        self.year = year;
+        self
     }
 
-    fn set_project(self, project: String) -> License {
-        License {
-            name: self.name,
-            organization: self.organization,
-            year: self.year,
-            project: project,
-        }
+    fn set_project(mut self, project: String) -> Self {
+        self.project = project;
+        self
     }
 
     fn render(&self) -> String {
