@@ -1,5 +1,5 @@
 # Licensify
-This is a personal tool that I build to generate a Free and Open Source Software
+This is a personal tool that I built to generate a Free and Open Source Software
 (FOSS) license file. The tool provides command line options for customizing the 
 year, name, organization, and project information used when creating the license
 text. These values can also be set and re-used from a configuration file saved
