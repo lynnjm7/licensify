@@ -65,21 +65,17 @@ fn main() {
 
     config.year = match cmd_args.value_of("year") {
         Some(x) => String::from(x),
-        None => config.year
+        None => config.year,
     };
 
     config.project = match cmd_args.value_of("project") {
         Some(x) => String::from(x),
-        None => config.project
+        None => config.project,
     };
 
     // Generate the license text from the given paramaters
-    let license_txt = license::fetch_license_text(
-        license,
-        config.organization,
-        config.year,
-        config.project,
-    );
+    let license_txt =
+        license::fetch_license_text(license, config.organization, config.year, config.project);
 
     // Output the license text to stdout
     println!("{}", license_txt);
