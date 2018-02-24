@@ -52,6 +52,12 @@ licensify mit > LICENSE
 would write the text of the MIT license to a file named LICENSE with the default
 configuration values used.
 
+# Licenses
+The licenses used in this project are housed in the 
+[licenses](https://github.com/lynnjm7/licenses) repository and installed to your 
+local machine. Installing the licenses to your machine allows you to work 
+offline, add your own licenses, or customize the existing licenses to your needs.
+
 # License
 This project is released under the MIT license. For more information, refer to
 the LICENSE file in this repository.
