@@ -20,10 +20,10 @@ To setup this tool, simply run:
 licensify --init
 ```
 
-NOTE: You must run `--init` prior to using this tool!!
-
 As part of the setup process, you will be prompted to enter a series of default
 values to use when generating licenses in the future.
+
+**NOTE: You must run `--init` prior to using this tool!!**
 
 # Listing available options
 To list the available license templates that are installed, use
