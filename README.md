@@ -20,8 +20,10 @@ To setup this tool, simply run:
 licensify --init
 ```
 
+NOTE: You must run `--init` prior to using this tool!!
+
 As part of the setup process, you will be prompted to enter a series of default
-values to use when generating licenses.
+values to use when generating licenses in the future.
 
 # Listing available options
 To list the available license templates that are installed, use
@@ -30,8 +32,8 @@ To list the available license templates that are installed, use
 ignorify --list
 ```
 
-It is relatively trivial to `grep` through this list to be able to search for a
-specific license.
+It is relatively trivial to `grep` through this list to search for a specific 
+license.
 
 ```bash 
 ignorify --list | grep mit

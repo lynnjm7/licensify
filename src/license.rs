@@ -20,9 +20,9 @@ impl License {
     fn new(name: String) -> License {
         License {
             name: name,
-            organization: "".to_string(),
-            year: "".to_string(),
-            project: "".to_string(),
+            organization: String::new(),
+            year: String::new(),
+            project: String::new(),
         }
     }
 
@@ -104,10 +104,10 @@ pub fn list_licenses() {
     }
 }
 
-pub fn fetch_license_text(license: &str, org: &str, year: &str, project: &str) -> String {
-    License::new(license.to_string())
-        .set_org(org.to_string())
-        .set_year(year.to_string())
-        .set_project(project.to_string())
+pub fn fetch_license_text(license: String, org: String, year: String, project: String) -> String {
+    License::new(license)
+        .set_org(org)
+        .set_year(year)
+        .set_project(project)
         .render()
 }

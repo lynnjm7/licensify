@@ -48,7 +48,7 @@ fn main() {
     }
 
     let license = match cmd_args.value_of("license") {
-        Some(x) => x,
+        Some(x) => String::from(x),
         None => {
             println!("Please enter a valid license. Use --help for usage information.");
             process::exit(-1);
@@ -59,26 +59,26 @@ fn main() {
     // file values. The flag options should override the config file settings.
     let mut config = config::fetch_config();
     config.organization = match cmd_args.value_of("organization") {
-        Some(x) => x.to_string(),
+        Some(x) => String::from(x),
         None => config.organization,
     };
 
     config.year = match cmd_args.value_of("year") {
-        Some(x) => x.to_string(),
+        Some(x) => String::from(x),
         None => config.year
     };
 
     config.project = match cmd_args.value_of("project") {
-        Some(x) => x.to_string(),
+        Some(x) => String::from(x),
         None => config.project
     };
 
     // Generate the license text from the given paramaters
     let license_txt = license::fetch_license_text(
         license,
-        config.organization.as_str(),
-        config.year.as_str(),
-        config.project.as_str(),
+        config.organization,
+        config.year,
+        config.project,
     );
 
     // Output the license text to stdout

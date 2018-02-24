@@ -21,17 +21,17 @@ pub struct ConfigSettings {
 impl ConfigSettings {
     fn new() -> ConfigSettings {
         ConfigSettings {
-            default_license: "".to_string(),
-            organization: "".to_string(),
-            year: "".to_string(),
-            project: "".to_string(),
+            default_license: String::new(),
+            organization: String::new(),
+            year: String::new(),
+            project: String::new(),
         }
     }
 
     fn setup_default_license(mut self) -> Self {
         let mut license = prompt_user("Enter preferred license (default = mit): ");
         if license.is_empty() {
-            license = "mit".to_string();
+            license = String::from("mit");
         }
 
         self.default_license = license.to_lowercase();
@@ -49,6 +49,7 @@ impl ConfigSettings {
             "Enter preferred copyright year (default = {}): ",
             current_year
         ));
+
         if year.is_empty() {
             year = current_year;
         }
@@ -97,7 +98,6 @@ fn prompt_user(prompt: &str) -> String {
 fn get_config_file_path() -> PathBuf {
     let mut path = env::home_dir().unwrap();
     path.push(".licensify/config.toml");
-
     path
 }
 
@@ -117,6 +117,5 @@ pub fn fetch_config() -> ConfigSettings {
     let mut config_file = File::open(config_file_path).unwrap();
     let mut contents = String::new();
     config_file.read_to_string(&mut contents).unwrap();
-
     toml::from_str(contents.as_str()).unwrap()
 }
