@@ -114,7 +114,15 @@ pub fn init_config() {
 
 pub fn fetch_config() -> ConfigSettings {
     let config_file_path = get_config_file_path();
-    let mut config_file = File::open(config_file_path).unwrap();
+
+    let mut config_file = match File::open(config_file_path) {
+        Ok(x) => x,
+        Err(_) => {
+            println!("Please initialization with --init");
+            process::exit(-1);
+        }
+    };
+
     let mut contents = String::new();
     config_file.read_to_string(&mut contents).unwrap();
     toml::from_str(contents.as_str()).unwrap()
