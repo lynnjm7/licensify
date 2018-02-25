@@ -5,6 +5,32 @@ year, name, organization, and project information used when creating the license
 text. These values can also be set and re-used from a configuration file saved
 in the user's home directory.
 
+# Installation
+To install Licensify, you will need to have Rust installed. For more information 
+please visit [the Rust installation page](https://www.rust-lang.org/en-US/install.html). 
+
+After you have installed Rust (which should include the `cargo` utility), you 
+can install licensify with the following command:
+
+```bash
+cargo install --git https://github.com/lynnjm7/licensify
+```
+
+The installation will take a little while to build the release version of Licensify.
+Afterwords, you should have the latest build and everything should be ready to go!
+
+To verify that licensify has been properly installed you should be able to run 
+
+```bash
+licensify -V
+```
+
+which should show the licensify version information. 
+
+To complete the installation, you should run the setup command that is built
+into the tool and follow the on-screen instructions for configuring the utility.
+See the [Setup](#setup) section of this document.
+
 # Usage
 There are several different ways to use this utility. For instruction usage notes
 use
