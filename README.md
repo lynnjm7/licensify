@@ -27,7 +27,7 @@ licensify -V
 
 which should show the licensify version information. 
 
-To complete the installation, you should run the setup command that is built
+To complete the installation, run the setup command that is built
 into the tool and follow the on-screen instructions for configuring the utility.
 See the [Setup](#setup) section of this document.
 
